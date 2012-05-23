@@ -102,7 +102,8 @@ window.addEventListener("DOMContentLoaded", function(){
 	 	//console.log("id");
 		toggleControls("on");
 		if(localStorage.length === 0){
-			alert("There is no data in Local Storage.");
+			alert("There is no data in Local Storage so default data was added.");
+			autoFillData();
 		}
 		//Write data from local storage to browser
 		var makeDiv = document.createElement('div');
@@ -131,6 +132,26 @@ window.addEventListener("DOMContentLoaded", function(){
 			makeItemLinks(localStorage.key(i), linksLi); //Create our edit and delete buttons/link for each item in local storage.
 		}
 	};
+	
+	//Get the image for the right category
+	function getImage(catname, makeSubList){
+		var imageLi = document.createElement('li');
+		makeSubList.appendChild(imageLi);
+		var newImg = document.createElement('img');
+		var setSrc = newImg.setAttribute("src", "Images/" + catName + ".png");
+		imageLi.appendChild(newImg);
+	}
+
+	//Auto Populate Local Storage
+	function autoFillData(){
+		//The actual JSON OBJECT data required for this to work is coming from our json.js file
+		//Store JSON OBJECT into local storage
+		for(var n in JSON){
+			var id =Math.floor(Math.random()*100000001);
+			localStorage.setItem(id, JSON.stringify(JSON[n]));
+		}
+	}
+
 
 
 	//Make Item Links
@@ -270,7 +291,6 @@ window.addEventListener("DOMContentLoaded", function(){
 			storeData(this.key);
 		}
 
-		
 	};
 
 //Variable defaults, events, and calls
