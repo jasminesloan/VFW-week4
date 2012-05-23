@@ -78,5 +78,5 @@ var JSON = {
 		"quantity": ["Quantity:", "7"],
 		"date": ["Date:", "2012-06-01"],
 		"suggestions": ["Suggestions:", "Great App!"]
-	},
+	}
 }

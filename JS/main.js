@@ -144,10 +144,10 @@ window.addEventListener("DOMContentLoaded", function(){
 
 	//Auto Populate Local Storage
 	function autoFillData(){
-		//The actual JSON OBJECT data required for this to work is coming from our json.js file
+		//The actual JSON OBJECT data required for this to work is coming from our json.js file which is loaded from our html page
 		//Store JSON OBJECT into local storage
 		for(var n in JSON){
-			var id =Math.floor(Math.random()*100000001);
+			var id = Math.floor(Math.random()*100000001);
 			localStorage.setItem(id, JSON.stringify(JSON[n]));
 		}
 	}
@@ -299,7 +299,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	var	wishListValue = "No";
 	var errMsg = $('errors');
 	makeCats();
-	var diplayLink = $('displayLink');
+	var displayLink = $('displayLink');
 	displayLink.addEventListener("click", getData);
 	var clearLink = $('clear');
 	clearLink.addEventListener("click", clearLocal); 
