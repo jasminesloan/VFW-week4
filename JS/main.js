@@ -4,22 +4,20 @@
 
 
 //Wait until DOM is ready.
-window.addEventListener("DOMContentLoaded", function(){
+window.addEventListener("DOMContentLoaded", function () {
 
-
-	
 	//getElementsById Function
-	var $ = function(x){
+	var $ = function (x) {
 		var theElement = document.getElementById(x);
 		return theElement;
 	};
 
 	//create select field element and populate with options.
-	var makeCats = function(){
-		var formTag = document.getElementsByTagName("form"), //formTag is an array of all the form tags.
-			selectLi = $('select'),
-			makeSelect = document.createElement('select');
-			makeSelect.setAttribute("id","groups");
+	var makeCats = function () {
+			var formTag = document.getElementsByTagName("form"), //formTag is an array of all the form tags.
+				selectLi = $('select'),
+				makeSelect = document.createElement('select');
+			makeSelect.setAttribute("id", "groups");
 		for(var i=0, j=mixtapeGenres.length; i<j; i++){
 			var makeOption = document.createElement('option');
 			var optText = mixtapeGenres[i];
@@ -71,7 +69,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	 var storeData = function(key){
 	 	//If there is no key, this is a brand new item and we need a new key.
 		if (!key){
-				var id 				=Math.floor(Math.random()*100000001);
+				var id = Math.floor(Math.random()*100000001);
 		}else{
 			//Set the id to the existing key we're editing so that it will save our data.
 			//The key is the same that's been passed along from the editSubmit event handler
@@ -83,15 +81,15 @@ window.addEventListener("DOMContentLoaded", function(){
 		//Object properties contain array with the form label and input values.
 		getSelectedRadio();
 		getCheckboxValue();
-		var item				= {};
-			item.group 			= ["Genre:", $('groups').value];
-			item.email			= ["Email", $('email').value];
-			item.pword 			= ["Password", $('pword').value];
-			item.purchase 		= ["Purchase:", purchaseDate];
-			item.wishlist 		= ["Added to Wish List", wishListValue];
-			item.date 			= ["Date", $('date').value];
-			item.quantity 		= ["Quantity", $('quantity').value];
-			item.suggestions	= ["Suggestions", $('suggestions').value];
+		var item = {};
+			item.group = ["Genre:", $('groups').value];
+			item.email = ["Email", $('email').value];
+			item.pword = ["Password", $('pword').value];
+			item.purchase = ["Purchase:", purchaseDate];
+			item.wishlist = ["Added to Wish List", wishListValue];
+			item.date = ["Date", $('date').value];
+			item.quantity = ["Quantity", $('quantity').value];
+			item.suggestions = ["Suggestions", $('suggestions').value];
 		//Save data into Local Storage: Use stringify to convert our object
 		localStorage.setItem(id, JSON.stringify(item));
 		alert("Mixtape Saved!");
@@ -122,6 +120,7 @@ window.addEventListener("DOMContentLoaded", function(){
 			var obj = JSON.parse(value);
 			var makeSubList = document.createElement('ul');
 			makeLi.appendChild(makeSubList);
+			getImage(obj.group[1], makeSubList);
 			for(var n in obj){
 				var makeSubLi = document.createElement('li');
 				makeSubList.appendChild(makeSubLi);
@@ -131,28 +130,39 @@ window.addEventListener("DOMContentLoaded", function(){
 			}
 			makeItemLinks(localStorage.key(i), linksLi); //Create our edit and delete buttons/link for each item in local storage.
 		}
-	};
+	}
 	
 	//Get the image for the right category
-	function getImage(catname, makeSubList){
+	function getImage(catName, makeSubList){
 		var imageLi = document.createElement('li');
 		makeSubList.appendChild(imageLi);
 		var newImg = document.createElement('img');
-		var setSrc = newImg.setAttribute("src", "Images/" + catName + ".png");
+		var setSrc = newImg.setAttribute("src", "Images/" + catName + ".png");	
 		imageLi.appendChild(newImg);
 	}
+	
 
 	//Auto Populate Local Storage
 	function autoFillData(){
+		var json = {
+			"genre1": {
+		"group": ["Group:", "Dirty South"],
+		"email": ["Email:", "jasmine47jamieson@gmail.com"],
+		"pword": ["Password:", "fullsail"],
+		"purchase": ["Purchase:", "Now"],
+		"wishlist": ["Wishlist:", "No"],
+		"quantity": ["Quantity:", "2"],
+		"date": ["Date:", "2012-5-22"],
+		"suggestions": ["Suggestions:", "Please add more music"]
+	}
+		};
 		//The actual JSON OBJECT data required for this to work is coming from our json.js file which is loaded from our html page
 		//Store JSON OBJECT into local storage
-		for(var n in JSON){
+		for(var n in json){
 			var id = Math.floor(Math.random()*100000001);
-			localStorage.setItem(id, JSON.stringify(JSON[n]));
+			localStorage.setItem(id, JSON.stringify(json[n]));
 		}
 	}
-
-
 
 	//Make Item Links
 	//Create the edit and delete links for each stored item when displayed.
@@ -179,7 +189,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		deleteLink.addEventListener("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
-	};
+	}
 
 	function editItem(){
 		//Grab the data from our item from Local Storage
@@ -194,13 +204,13 @@ window.addEventListener("DOMContentLoaded", function(){
 		$('pword').value = item.pword[1];
 		var radios = document.forms[0].answer;
 		for(var i=0; i < radios.length; i++){
-			if(radios[1].value == "Now" && item.purchaseDate[1] =="Now"){
+			if(radios[1].value === "Now" && item.purchaseDate[1] === "Now"){
 				radios[i].setAttribute("checked", "checked");
-			}else if(radios[i].value == "Place in Que" && item.purchase[1] == "Place in Que"){
+			}else if(radios[i].value === "Place in Que" && item.purchase[1] === "Place in Que"){
 				radios[i].setAttribute("checked", "checked");
 			}
 		}
-		if(item.wishList[1] == "Yes"){
+		if(item.wishList[1] === "Yes"){
 			$('yes').setAttribute("checked", "checked");
 		}
 		$('date').value = item.date[1];
@@ -216,7 +226,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		//so we can use that value when save the data we edited
 		editSubmit.addEventListener("click", validate);
 		editSubmit.key = this.key;
-	};
+	}
 
 	var clearLocal = function(){
 		if(localStorage.length === 0){
@@ -238,7 +248,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		}else{
 			alert("Mixtape was not deleted.");
 		}
-	};
+	}
 
 	function validate(e){
 		//Define the elements we want to check
@@ -291,7 +301,7 @@ window.addEventListener("DOMContentLoaded", function(){
 			storeData(this.key);
 		}
 
-	};
+	}
 
 //Variable defaults, events, and calls
 	var mixtapeGenres = ["--Choose A Genre--", "Dirty South", "Gospel", "Hip Hop", "Miami Bass", "Old School", "Oomp Camp Albums", "R&B/Slow Jams", "Reggae"];

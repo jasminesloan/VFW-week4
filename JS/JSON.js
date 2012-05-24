@@ -1,4 +1,4 @@
-var JSON = {
+var json = {
 	"genre1": {
 		"group": ["Group:", "Dirty South"],
 		"email": ["Email:", "jasmine47jamieson@gmail.com"],
@@ -79,4 +79,4 @@ var JSON = {
 		"date": ["Date:", "2012-06-01"],
 		"suggestions": ["Suggestions:", "Great App!"]
 	}
-}
+};
