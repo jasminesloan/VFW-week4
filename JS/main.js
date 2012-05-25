@@ -137,7 +137,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		var imageLi = document.createElement('li');
 		makeSubList.appendChild(imageLi);
 		var newImg = document.createElement('img');
-		var setSrc = newImg.setAttribute("src", "/images" + catName + ".png");	
+		var setSrc = newImg.setAttribute("src", "images/" + catName + ".png");	
 		imageLi.appendChild(newImg);
 	}
 	
@@ -154,6 +154,26 @@ window.addEventListener("DOMContentLoaded", function () {
 		"quantity": ["Quantity:", "2"],
 		"date": ["Date:", "2012-5-22"],
 		"suggestions": ["Suggestions:", "Please add more music"]
+	},
+		"genre2": {
+		"group": ["Group:", "Gospel"],
+		"email": ["Email:", "jasminesloan@fullsail.com"],
+		"pword": ["Password:", "jasmine"],
+		"purchase": ["Purchase:", "Place in Que"],
+		"wishlist": ["Wishlist:", "No"],
+		"quantity": ["Quantity:", "7"],
+		"date": ["Date:", "2012-6-22"],
+		"suggestions": ["Suggestions:", "Keep up the good work!"]
+	},
+	"genre3": {
+		"group": ["Group:", "Hip Hop"],
+		"email": ["Email:", "jasmine47@gmail.com"],
+		"pword": ["Password:", "music"],
+		"purchase": ["Purchase:", "Now"],
+		"wishlist": ["Wishlist:", "No"],
+		"quantity": ["Quantity:", "5"],
+		"date": ["Date:", "2012-5-22"],
+		"suggestions": ["Suggestions:", "Great music!"]
 	}
 		};
 		//The actual JSON OBJECT data required for this to work is coming from our json.js file which is loaded from our html page
